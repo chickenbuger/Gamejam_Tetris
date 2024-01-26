@@ -10,12 +10,19 @@ public class GameMode : MonoBehaviour
     void Start()
     {
         CreateObjectSpawner();
+
+        InvokeRepeating("RequestSpawnerMinoActorToSpawner", 0.0f, 2.0f);
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    private void RequestSpawnerMinoActorToSpawner()
+    {
+        ObjectSpawner.GetComponent<Spawner>().RequestCreateMino();
     }
 
     private void CreateObjectSpawner()
