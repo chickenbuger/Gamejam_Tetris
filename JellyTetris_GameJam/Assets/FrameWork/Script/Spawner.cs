@@ -28,6 +28,6 @@ public class Spawner : MonoBehaviour
     private void CreateMino(int _index)
     {   
         GameObject SpawnActor = Instantiate(MinoObjects[_index], SpawnerPosition, Quaternion.identity);
-        SpawnActor.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
+        SpawnActor.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
     }
 }

@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f78dd3bc4493b6440b52d8ea448c0f71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawnerPosition: {x: 0, y: 0, z: 99}
+  SpawnerPosition: {x: -4, y: 3.75, z: 99}
   MinoObjects:
   - {fileID: 3988116041466318348, guid: c07c50e8f90af564097bad16e0200195, type: 3}
   - {fileID: 903615644642421597, guid: 9bfc7e02caaf36b4d9209ca8d596e392, type: 3}

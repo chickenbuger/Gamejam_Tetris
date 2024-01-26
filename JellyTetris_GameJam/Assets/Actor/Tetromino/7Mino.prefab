@@ -460,6 +460,7 @@ GameObject:
   m_Component:
   - component: {fileID: 265452241101892107}
   - component: {fileID: 7184712658288447275}
+  - component: {fileID: 856399639814325884}
   m_Layer: 0
   m_Name: 7Mino
   m_TagString: Untagged
@@ -498,6 +499,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 880c332f83ca15d4687510235847fa1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &856399639814325884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3405412951938227209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a252c5a1e776114386dad5d28e9d977, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fall: 0
+  fallTime: 0.5
+  rotationPoint: {x: 0, y: 0, z: 0}
 --- !u!1 &7068549050888986080
 GameObject:
   m_ObjectHideFlags: 0
