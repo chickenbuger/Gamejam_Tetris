@@ -19,15 +19,16 @@ public class Spawner : MonoBehaviour
     
     }
 
-    public void RequestCreateMino()
+    public GameObject RequestCreateMino()
     {
         int RandomIndex = UnityEngine.Random.Range(0, 7);
-        CreateMino(RandomIndex);
+        return CreateMino(RandomIndex);
     }
 
-    private void CreateMino(int _index)
+    private GameObject CreateMino(int _index)
     {   
         GameObject SpawnActor = Instantiate(MinoObjects[_index], SpawnerPosition, Quaternion.identity);
         SpawnActor.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        return SpawnActor;
     }
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using Unity.VisualScripting;
 
 public class GameMode : MonoBehaviour
 {
@@ -22,13 +23,18 @@ public class GameMode : MonoBehaviour
         GridBoard = new Vector3[21, 12];
         InitGridBoard();
 
-        InvokeRepeating("RequestSpawnerMinoActorToSpawner", 0.0f, 2.0f);
+        InvokeRepeating("RequestSpawnerMinoActorToSpawner", 0.0f, 4.0f);
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void RequestDisconnectController(GameObject _gameobject)
+    {
+        DisConnectController(gameObject);
     }
 
     public void RequestDeleteGridBoardLineCheck(Vector3[] Positions)
@@ -47,55 +53,54 @@ public class GameMode : MonoBehaviour
         RequestSpawnerMinoActorToSpawner();
     }
 
-    private int[] CastPositionToGridIndex(float[] Positions)
-    {
-        int[] GridIndex = new int[Positions.Length];
-
-        int i = 0;
-        foreach(float index in Positions)
-        {
-            GridIndex[i] = (int)((index + 5.5f) * 2.0f);
-        }    
-
-        return GridIndex;
-    }
-
     private void RequestSpawnerMinoActorToSpawner()
     {
-        ObjectSpawner.GetComponent<Spawner>().RequestCreateMino();
+        GameObject ParentObject = ObjectSpawner.GetComponent<Spawner>().RequestCreateMino();
+        ConnectController(ParentObject);
     }
 
     private void CreateObjectSpawner()
     {
         Instantiate(ObjectSpawner, transform.position, Quaternion.identity);
     }
-    private float[] RemoveDuplicates(float[] array)
+
+    private void ConnectController(GameObject _Object)
     {
-        List<float> uniqueList = new List<float>();
-        HashSet<float> seenValues = new HashSet<float>();
+        _Object.AddComponent<MovementInput>();
+    }
 
-        foreach (float value in array)
-        {
-            // HashSet을 사용하여 중복값을 체크하고 중복이 아닌 경우에만 리스트에 추가
-            if (seenValues.Add(value))
-            {
-                uniqueList.Add(value);
-            }
-        }
-
-        return uniqueList.ToArray();
+    private void DisConnectController(GameObject _Object)
+    {
+        Destroy(_Object.GetComponent<MovementInput>());
     }
 
     private void InitGridBoard()
     {
-        for(int y=0;y<21;y++)
+        for (int y = 0; y < 21; y++)
         {
-            for(int x=0;x<12;x++)
+            for (int x = 0; x < 12; x++)
             {
                 GridBoard[y, x] = new Vector3(-7.0f + x * 0.5f, -5.5f + y * 0.5f, 0.0f);
                 //Init Wall Setting
                 if (x == 0 || x == 11) GridBoard[y, x].z = 3.0f;
                 if (y == 0) GridBoard[y, x].z = 3.0f;
+            }
+        }
+    }
+
+    private void DeleteGridLine(int[] _iLines, bool[] _bLines)
+    {
+        for (int i = 0; i < _iLines.Length; i++)
+        {
+            if (_bLines[i])
+            {
+                for (int y = _iLines[i] + 1; y < 22; y++)
+                {
+                    for (int x = 1; x < 11; x++)
+                    {
+                        GridBoard[y - 1, x] = GridBoard[y, x];
+                    }
+                }
             }
         }
     }
@@ -116,20 +121,31 @@ public class GameMode : MonoBehaviour
         return bDatas;
     }
 
-    private void DeleteGridLine(int[] _iLines, bool[] _bLines)
+    private int[] CastPositionToGridIndex(float[] Positions)
     {
-        for(int i=0;i< _iLines.Length;i++)
+        int[] GridIndex = new int[Positions.Length];
+
+        int i = 0;
+        foreach(float index in Positions)
         {
-            if (_bLines[i])
+            GridIndex[i] = (int)((index + 5.5f) * 2.0f);
+        }    
+
+        return GridIndex;
+    }
+
+    private float[] RemoveDuplicates(float[] array)
+    {
+        List<float> uniqueList = new List<float>();
+        HashSet<float> seenValues = new HashSet<float>();
+
+        foreach (float value in array)
+        {
+            if (seenValues.Add(value))
             {
-                for(int y = _iLines[i] + 1; y < 22; y++)
-                {
-                    for(int x = 1; x < 11; x++)
-                    {
-                        GridBoard[y - 1, x] = GridBoard[y, x];
-                    }
-                }
+                uniqueList.Add(value);
             }
         }
+        return uniqueList.ToArray();
     }
 }
