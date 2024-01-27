@@ -49,7 +49,6 @@ public class GameMode : MonoBehaviour
                 //Init Wall Setting
                 if (x == 0 || x == 11) GridBoard[y, x].z = 3.0f;
                 if (y == 0) GridBoard[y, x].z = 3.0f;
-                Debug.Log(GridBoard[y, x].y + " " + GridBoard[y, x].x + " " + GridBoard[y, x].z);
             }
         }
     }
