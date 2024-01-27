@@ -16,11 +16,7 @@ public class Movement : MonoBehaviour
         {
             if(fall == false)
             {
-                transform.position += new Vector3(-1, 0, 0);
-                //if (!ValidMove())
-                //{
-                //    transform.position -= new Vector3(-1, 0, 0);
-                //}
+                transform.position += new Vector3(-0.5f, 0, 0);
             }
         }
 
@@ -28,11 +24,7 @@ public class Movement : MonoBehaviour
         {
             if (fall == false)
             {
-                transform.position += new Vector3(1, 0, 0);
-                //if (!ValidMove())
-                //{
-                //    transform.position -= new Vector3(1, 0, 0);
-                //}
+                transform.position += new Vector3(0.5f, 0, 0);
             }
         }
 
@@ -40,37 +32,14 @@ public class Movement : MonoBehaviour
         {
             if (fall == false)
             {
-                transform.position += new Vector3(0, -1, 0);
+                transform.position += new Vector3(0, -0.5f, 0);
                 previousTime = Time.time;
-                //if (!ValidMove())
-                //{
-                //    transform.position -= new Vector3(0, -1, 0);
-                //}
             }
         }
 
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
-            transform.RotateAround(transform.TransformPoint(rotationPoint), new Vector3(0, 0, 1), 90);
-            //if(!ValidMove())
-            //{
-            //    transform.RotateAround(transform.TransformPoint(rotationPoint), new Vector3(0, 0, 1), -90);
-            //}
+            transform.RotateAround(transform.TransformPoint(rotationPoint), new Vector3(0, 0, 0.5f), 90);
         }
     }
-
-    //bool ValidMove()
-    //{
-    //    foreach(Transform childrenin in transform)
-    //    {
-    //        int roundX = Mathf.RoundToInt(childrenin.transform.position.x);
-    //        int roundY = Mathf.RoundToInt(childrenin.transform.position.y);
-
-    //        if(roundX < 0 || roundX >= width || roundY < 0 || roundY >= height)
-    //        {
-    //            return false;
-    //        }
-    //    }
-    //    return true;
-    //}
 }
